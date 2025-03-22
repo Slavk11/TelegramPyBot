@@ -1,6 +1,8 @@
+import asyncio
 from aiogram import Router, F
 from aiogram.types import Message
 from aiogram.filters import CommandStart, Command
+from aiogram.enums import ChatAction
 
 router = Router()
 
@@ -10,6 +12,9 @@ async def check_router(message: Message):
 
 @router.message(CommandStart())
 async def cmd_start(message: Message):
+    await message.bot.send_chat_action(chat_id=message.from_user.id,
+                                       action=ChatAction.TYPING)
+    await asyncio.sleep(2)
     await message.answer('Добро пожаловать!')
 
 @router.message(F.text == 'Привет!')
