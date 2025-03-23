@@ -3,7 +3,7 @@ import asyncio
 from aiogram import Bot, Dispatcher
 
 from dotenv import load_dotenv
-from handlers import router
+from app.handlers import router
 
 async def main():
     load_dotenv()
