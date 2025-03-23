@@ -1,8 +1,10 @@
 import asyncio
 from aiogram import Router, F
-from aiogram.types import Message
+from aiogram.types import Message, ReplyKeyboardRemove
 from aiogram.filters import CommandStart, Command
 from aiogram.enums import ChatAction
+
+import app.keyboards as kb
 
 router = Router()
 
@@ -15,7 +17,7 @@ async def cmd_start(message: Message):
     await message.bot.send_chat_action(chat_id=message.from_user.id,
                                        action=ChatAction.TYPING)
     await asyncio.sleep(2)
-    await message.answer('Добро пожаловать!')
+    await message.answer('Добро пожаловать!', reply_markup=ReplyKeyboardRemove())
 
 @router.message(F.text == 'Привет!')
 async def hello(message: Message):
@@ -23,7 +25,7 @@ async def hello(message: Message):
 
 @router.message(Command('help'))
 async def cmd_help(message: Message):
-    await message.answer('Пока что бот не умеет нчиего!')
+    await message.answer('Пока что бот не умеет нчиего!', reply_markup=kb.inline_main)
 
 @router.message(F.photo)
 async def photo_photo(message: Message):
