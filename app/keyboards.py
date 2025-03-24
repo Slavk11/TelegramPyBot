@@ -1,5 +1,5 @@
 from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
-
+from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 
 main = ReplyKeyboardMarkup(keyboard=[
@@ -34,3 +34,10 @@ catalog = InlineKeyboardMarkup(inline_keyboard=[
 back = InlineKeyboardMarkup(inline_keyboard=[
     [InlineKeyboardButton(text='Назад', callback_data='catalog')],
 ])
+
+async def catalog_builder():
+    brands = ['Nike', 'Adidas', 'Puma', 'Reebok', 'Under Armour', 'New Balance', 'Asics', 'Fila', 'Skechers', 'Converse']
+    keyboard = InlineKeyboardBuilder()
+    for brand in brands:
+        keyboard.add(InlineKeyboardButton(text=brand, callback_data=f'item_{brand}'))
+    return keyboard.adjust(2).as_markup()
