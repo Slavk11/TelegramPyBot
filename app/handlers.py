@@ -48,7 +48,7 @@ async def cmd_reg_photo(message: Message, state: FSMContext):
     await state.update_data(photo=message.photo[-1].file_id)
     data = await state.get_data()
     print(data)
-    await message.answer_photo(photo=data['photo'], caption=f'Имя {data["name"]}\nВозраст {data["age"]}',)
+    await message.answer_photo(photo=data['photo'], caption=f'Имя: {data["name"]}\nВозраст: {data["age"]}',)
     await state.clear()
 
 
